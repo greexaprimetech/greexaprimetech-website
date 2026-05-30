@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "greexaprimetech-website",
+  "name": "greexa-primetech",
   "compatibility_date": "2026-05-30",
   "assets": {
     "directory": "./build",
