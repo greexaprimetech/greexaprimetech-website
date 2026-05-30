@@ -12,9 +12,9 @@ export default function Home() {
   return (
     <PageLayout>
       <SEO
-        title="Greexa PrimeTech | Web Development, SaaS Solutions, AI Automation & Software Consulting"
-        description="Greexa PrimeTech builds modern websites, scalable SaaS platforms, AI-powered automation solutions, and custom business software for startups and growing businesses."
-        keywords="Greexa PrimeTech, web development company, software development company, SaaS development, AI automation, custom software solutions, React development, business software"
+        title="Greexa PrimeTech | Software Development Company, Web Development, SaaS & AI Automation"
+        description="Greexa PrimeTech is a software development company building websites, web applications, dashboards, APIs, SaaS platforms, CRM systems, and AI automation solutions for startups, local businesses, societies, and growing brands."
+        keywords="Greexa PrimeTech, software development company, web development company, custom software development, website development, web application development, SaaS development, AI automation, business automation, CRM development, dashboard development, API development, React development, MERN stack development, Java Spring Boot development, software consulting"
         canonical="https://www.greexaprimetech.com/"
       />
       <HeroSection />

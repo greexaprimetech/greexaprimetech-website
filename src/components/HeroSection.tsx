@@ -53,7 +53,7 @@ export function HeroSection() {
         <div className="gx-content">
           <div className="gx-eyebrow gx-rise-1">
             <CheckCircle2 size={16} />
-            Custom software for growing businesses
+            Software development company for growing businesses
           </div>
 
           <h1 className="gx-headline gx-rise-2">
@@ -88,7 +88,10 @@ export function HeroSection() {
           </p>
         </div>
 
-        <div className="gx-product-card gx-rise-4" aria-label="Software preview">
+        <div
+          className="gx-product-card gx-rise-4"
+          aria-label="Software preview"
+        >
           <div className="gx-card-toolbar">
             <span>Operations Dashboard</span>
             <strong>Live ready</strong>
