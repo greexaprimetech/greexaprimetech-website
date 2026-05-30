@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@theme {
+  /* Clean enterprise software palette */
+  --color-brand-navy-900: #0f172a;
+  --color-brand-navy-800: #1e293b;
+  --color-brand-navy-700: #334155;
+  --color-brand-navy-600: #475569;
+
+  --color-neon-cyan-500: #14b8a6;
+  --color-neon-cyan-400: #2dd4bf;
+  --color-neon-blue-500: #0ea5e9;
+  --color-neon-blue-400: #38bdf8;
+  --color-neon-purple-500: #6366f1;
+
+  --color-glass-white: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+
+  /* Responsive Spacing */
+  --spacing-section: 6rem;
+  --spacing-section-mobile: 3rem;
+
+  /* Typography */
+  --font-family-display: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Shadows & Glows */
+  --shadow-glow-cyan: 0 18px 42px rgba(20, 184, 166, 0.16);
+  --shadow-glow-blue: 0 18px 42px rgba(14, 165, 233, 0.14);
+  --shadow-glass: 0 18px 42px 0 rgba(15, 23, 42, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden; /* ✅ prevents horizontal scroll on mobile */
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-display);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #f8fbff 0%, #eef6ff 48%, #ffffff 100%);
+  color: #0f172a;
+  min-height: 100svh; /* ✅ mobile-safe viewport (better than 100vh) */
+}
+
+/* Responsive typography using clamp() */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.15;
+}
+
+h1 {
+  font-size: clamp(2rem, 4.5vw, 4rem); /* ✅ responsive */
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3.5vw, 3rem); /* ✅ responsive */
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.5vw, 2rem); /* ✅ responsive */
+}
+
+p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* Custom Scrollbar (desktop only feel) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e2e8f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #14b8a6;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0ea5e9;
+}
+
+/* ✅ On mobile devices, thinner scrollbar or none */
+@media (max-width: 640px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+}
+
+/* Glow animations */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
