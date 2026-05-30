@@ -155,9 +155,9 @@ export default function Services() {
   return (
     <PageLayout>
       <SEO
-        title="Software Development Services | Greexa PrimeTech"
-        description="Explore Greexa PrimeTech services including website development, SaaS development, AI automation, custom software, CRM, ERP, and business automation solutions."
-        keywords="software development services, web development, SaaS development, AI automation, CRM development, ERP development, custom software company"
+        title="Software Development Services | Websites, SaaS, CRM & AI Automation"
+        description="Explore Greexa PrimeTech services including website development, custom software development, SaaS platforms, CRM systems, dashboards, APIs, and business automation solutions."
+        keywords="software development services, website development services, custom software development, SaaS development, CRM development, dashboard development, API development, AI automation"
         canonical="https://www.greexaprimetech.com/services"
       />
       {/* Hero Section */}

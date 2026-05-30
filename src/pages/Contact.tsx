@@ -863,9 +863,9 @@ export default function Contact() {
   return (
     <PageLayout>
       <SEO
-        title="Contact Greexa PrimeTech | Start Your Software Project"
-        description="Contact Greexa PrimeTech to discuss your website, SaaS platform, AI automation, or custom software development project."
-        keywords="contact Greexa PrimeTech, software development enquiry, web development company contact, SaaS development consultation"
+        title="Contact Greexa PrimeTech | Website & Software Development Company"
+        description="Contact Greexa PrimeTech to discuss website development, custom software, SaaS platforms, CRM systems, dashboards, APIs, and AI automation solutions."
+        keywords="contact Greexa PrimeTech, software development enquiry, website development company contact, custom software consultation"
         canonical="https://www.greexaprimetech.com/contact"
       />
       {/* ── Keyframes injected once ── */}

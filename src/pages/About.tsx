@@ -85,8 +85,8 @@ export default function About() {
     <PageLayout>
       <SEO
         title="About Greexa PrimeTech | Software Development Company"
-        description="Greexa PrimeTech is a software development and consulting company helping businesses build websites, SaaS products, automation tools, and custom digital platforms."
-        keywords="about Greexa PrimeTech, software company, web development company, custom software company, technology consulting"
+        description="Greexa PrimeTech is a software development company helping startups, local businesses, societies, and growing brands build websites, custom software, SaaS platforms, and automation solutions."
+        keywords="about Greexa PrimeTech, software development company, website development company, software consulting, custom software company"
         canonical="https://www.greexaprimetech.com/about"
       />
       <section style={heroSectionStyle}>

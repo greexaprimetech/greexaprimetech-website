@@ -361,9 +361,9 @@ export default function Portfolio() {
   return (
     <PageLayout>
       <SEO
-        title="Portfolio | Greexa PrimeTech"
-        description="View Greexa PrimeTech projects including websites, SaaS platforms, business software, AI automation tools, and custom digital solutions."
-        keywords="Greexa PrimeTech portfolio, web development portfolio, software development projects, SaaS projects, custom software portfolio"
+        title="Software Development Portfolio | Greexa PrimeTech Projects"
+        description="View Greexa PrimeTech projects including websites, web applications, dashboards, SaaS platforms, CRM systems, and business automation software."
+        keywords="software development portfolio, website development portfolio, web application projects, SaaS projects, CRM software projects, Greexa PrimeTech portfolio"
         canonical="https://www.greexaprimetech.com/portfolio"
       />
       <style>
