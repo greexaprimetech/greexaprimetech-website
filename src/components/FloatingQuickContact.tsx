@@ -28,6 +28,14 @@ export function FloatingQuickContact() {
 
   return (
     <div className="gx-floating-contact" aria-label="Quick contact options">
+      <div className="gx-floating-contact-prompt" aria-hidden="true">
+        <span className="gx-floating-contact-status-dot" />
+        <span>
+          Free project consultation
+          <small>Usually replies fast</small>
+        </span>
+      </div>
+
       <a
         className="gx-floating-contact-call"
         href="tel:+919561436105"
@@ -58,6 +66,7 @@ export function FloatingQuickContact() {
       >
         <span className="gx-floating-contact-copy">
           <span>Chat on WhatsApp</span>
+          <small>Free consult</small>
         </span>
         <span className="gx-floating-contact-icon-wrap">
           <WhatsAppIcon />
