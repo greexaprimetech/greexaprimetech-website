@@ -220,6 +220,7 @@
 import React, { lazy, Suspense } from "react";
 import { createBrowserRouter, Outlet, useLocation } from "react-router-dom";
 import { AnalyticsTracker } from "./components/AnalyticsTracker";
+import { FloatingQuickContact } from "./components/FloatingQuickContact";
 
 const Home = lazy(() => import("./pages/Home"));
 const Services = lazy(() => import("./pages/Services"));
@@ -368,6 +369,7 @@ function AppRouteLayout() {
       <div className="gx-route-transition" key={location.pathname}>
         <Outlet />
       </div>
+      <FloatingQuickContact />
     </>
   );
 }

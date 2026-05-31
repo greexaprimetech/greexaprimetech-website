@@ -4040,3 +4040,225 @@ textarea::placeholder {
     filter: none;
   }
 }
+
+.gx-floating-contact {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 253, 250, 0.88)),
+    #ffffff;
+  box-shadow:
+    0 22px 54px rgba(15, 23, 42, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(18px);
+  animation: gx-floating-contact-in 620ms cubic-bezier(0.22, 1, 0.36, 1) 220ms both;
+}
+
+.gx-floating-contact::before {
+  content: "";
+  position: absolute;
+  inset: -0.35rem;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(20, 184, 166, 0.28),
+    rgba(14, 165, 233, 0.18)
+  );
+  opacity: 0.5;
+  filter: blur(16px);
+}
+
+.gx-floating-contact-call,
+.gx-floating-contact-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition:
+    transform 220ms ease,
+    background 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.gx-floating-contact-call {
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  border: 1px solid rgba(20, 184, 166, 0.18);
+  border-radius: 999px;
+  background: #f0fdfa;
+  padding: 0 0.9rem;
+  color: #0f766e;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.gx-floating-contact-whatsapp {
+  gap: 0.7rem;
+  min-height: 3.2rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0f172a, #0f766e);
+  padding: 0.45rem 0.5rem 0.45rem 1rem;
+  color: #ffffff;
+  box-shadow: 0 16px 32px rgba(15, 118, 110, 0.24);
+}
+
+.gx-floating-contact-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.12;
+}
+
+.gx-floating-contact-copy span {
+  font-size: 0.86rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.gx-floating-contact-copy small {
+  margin-top: 0.18rem;
+  color: rgba(204, 251, 241, 0.92);
+  font-size: 0.7rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.gx-floating-contact-icon-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: #22c55e;
+  color: #ffffff;
+  box-shadow:
+    0 0 0 6px rgba(34, 197, 94, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.gx-floating-contact-icon-wrap::after {
+  content: "";
+  position: absolute;
+  inset: -0.34rem;
+  border: 1px solid rgba(34, 197, 94, 0.36);
+  border-radius: inherit;
+  animation: gx-floating-contact-pulse 2.6s ease-out infinite;
+}
+
+.gx-floating-contact-whatsapp-icon {
+  width: 1.45rem;
+  height: 1.45rem;
+}
+
+.gx-floating-contact-call:hover,
+.gx-floating-contact-call:focus-visible,
+.gx-floating-contact-whatsapp:hover,
+.gx-floating-contact-whatsapp:focus-visible {
+  transform: translateY(-3px);
+  outline: none;
+}
+
+.gx-floating-contact-call:hover,
+.gx-floating-contact-call:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+}
+
+.gx-floating-contact-whatsapp:hover,
+.gx-floating-contact-whatsapp:focus-visible {
+  background: linear-gradient(135deg, #0f766e, #0ea5e9);
+  box-shadow: 0 20px 38px rgba(14, 165, 233, 0.22);
+}
+
+@keyframes gx-floating-contact-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes gx-floating-contact-pulse {
+  0% {
+    opacity: 0.78;
+    transform: scale(0.88);
+  }
+
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.24);
+  }
+}
+
+@media (max-width: 640px) {
+  .gx-floating-contact {
+    right: max(0.75rem, env(safe-area-inset-right));
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    gap: 0.45rem;
+    padding: 0.38rem;
+    max-width: calc(100vw - 1.5rem);
+  }
+
+  .gx-floating-contact-call {
+    width: 2.8rem;
+    min-height: 2.8rem;
+    padding: 0;
+  }
+
+  .gx-floating-contact-call span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .gx-floating-contact-whatsapp {
+    min-height: 3rem;
+    padding: 0.35rem;
+  }
+
+  .gx-floating-contact-copy {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .gx-floating-contact-icon-wrap {
+    width: 2.35rem;
+    height: 2.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gx-floating-contact,
+  .gx-floating-contact-icon-wrap::after {
+    animation: none;
+  }
+
+  .gx-floating-contact-call,
+  .gx-floating-contact-whatsapp {
+    transition: none;
+  }
+}
