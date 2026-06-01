@@ -802,9 +802,15 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-      const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      // const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      // const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      // const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      const SERVICE_ID =
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_nujyedz";
+      const TEMPLATE_ID =
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_qvkk25p";
+      const PUBLIC_KEY =
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "SdLsvwmeSbu3-fXGo";
 
       if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
         throw new Error(
