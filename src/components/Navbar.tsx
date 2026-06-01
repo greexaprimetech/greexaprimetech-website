@@ -268,7 +268,7 @@ export function Navbar() {
                     event.currentTarget.style.background = "#0f172a";
                   }}
                 >
-                  Get a Quote
+                  Get In Touch
                   <ArrowUpRight size={16} />
                 </Link>
               </div>

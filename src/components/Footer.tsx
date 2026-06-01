@@ -302,10 +302,10 @@ export function Footer() {
               </ContactRow>
               <ContactRow icon={<Phone size={20} />}>
                 <a href="tel:+919561436105" style={{ color: "#e2e8f0" }}>
-                  Rahul: +91 9561436105
+                  +91 9561436105
                 </a>
                 <a href="tel:+919325997861" style={{ color: "#e2e8f0" }}>
-                  Nitin: +91 9325997861
+                  +91 9325997861
                 </a>
               </ContactRow>
             </div>
@@ -323,13 +323,21 @@ export function Footer() {
           }}
         >
           <p>&copy; {currentYear} Greexa Primetech. All rights reserved.</p>
-          <div className="flex gap-5">
-            <a href="#" style={{ color: "#cbd5e1" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "0.75rem 1.25rem",
+              whiteSpace: "nowrap",
+            }}
+          >
+            <Link to="/privacy-policy" style={{ color: "#cbd5e1" }}>
               Privacy Policy
-            </a>
-            <a href="#" style={{ color: "#cbd5e1" }}>
+            </Link>
+            <Link to="/terms-of-service" style={{ color: "#cbd5e1" }}>
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>

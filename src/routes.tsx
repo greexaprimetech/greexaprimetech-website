@@ -228,6 +228,8 @@ const Services = lazy(() => import("./pages/Services"));
 const About = lazy(() => import("./pages/About"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const Contact = lazy(() => import("./pages/Contact"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 
 function PageLoader() {
   return (
@@ -410,6 +412,14 @@ export const router = createBrowserRouter([
       {
         path: "contact",
         element: withSuspense(Contact),
+      },
+      {
+        path: "privacy-policy",
+        element: withSuspense(PrivacyPolicy),
+      },
+      {
+        path: "terms-of-service",
+        element: withSuspense(TermsOfService),
       },
     ],
   },

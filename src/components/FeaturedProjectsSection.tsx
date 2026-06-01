@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, BarChart3, Film, MonitorCog } from "lucide-react";
 import SAS from "../Images/SAS.png";
+import AnalyticsAdminImage from "../Images/portfolio/Analytics Admin.webp";
+import EnterpriseERPImage from "../Images/portfolio/EnterpriseERPSystem.webp";
 const projects = [
   {
     icon: <Film className="h-6 w-6" />,
@@ -29,8 +31,7 @@ const projects = [
       "Comprehensive ERP solution for manufacturing with real-time analytics.",
     tags: ["React", "Node.js", "PostgreSQL", "Redis"],
     accent: "sky",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80",
+    image: EnterpriseERPImage,
   },
   {
     icon: <BarChart3 className="h-6 w-6" />,
@@ -40,8 +41,7 @@ const projects = [
       "Feature-rich admin panel with data visualization and reporting.",
     tags: ["React", "Chart.js", "Material UI", "REST API"],
     accent: "indigo",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80",
+    image: AnalyticsAdminImage,
   },
 ];
 

@@ -1,9 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import type { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Code2, ExternalLink, X } from "lucide-react";
 import { PageLayout } from "../components/PageLayout";
 import SAS from "../Images/SAS.png";
+import AnalyticsAdminImage from "../Images/portfolio/Analytics Admin.webp";
+import EnterpriseERPImage from "../Images/portfolio/EnterpriseERPSystem.webp";
+import FoodDeliveryImage from "../Images/portfolio/Food Delivery.webp";
+import GraphQLGatewayImage from "../Images/portfolio/GraphQL API Gateway.webp";
+import HealthcareImage from "../Images/portfolio/Healthcare.webp";
+import InventoryManagementImage from "../Images/portfolio/Inventory Management.webp";
+import LuxuryFashionImage from "../Images/portfolio/Luxury Fashion.webp";
+import RESTfulAPIImage from "../Images/portfolio/RESTful API.webp";
+import SubscriptionImage from "../Images/portfolio/Subscription.webp";
 import { SEO } from "../components/SEO";
 
 type ProjectCategory = "All" | "Web" | "Admin" | "Ecommerce" | "API";
@@ -29,24 +39,304 @@ const categories: ProjectCategory[] = [
   "API",
 ];
 
+// const projects: Project[] = [
+//   {
+//     id: 10,
+//     title: "Start Animation Studio Website",
+//     category: "Web",
+//     shortDesc:
+//       "Responsive animation studio website with immersive visuals, polished motion, and enquiry handling",
+//     image: SAS,
+//     tags: ["React", "Tailwind CSS", "Redux", "TypeScript"],
+//     challenge:
+//       "An animation studio needed a premium website that could present visual work clearly, feel cinematic, and make it easy for clients to send project enquiries.",
+//     solution:
+//       "We built a responsive studio website with React and TypeScript, Tailwind CSS styling, animation-focused UI details, Redux state handling, and EmailJS-powered contact flows.",
+//     results: [
+//       "Polished visual-first presentation for studio services",
+//       "Responsive layout across desktop, tablet, and mobile",
+//       "Smooth animated sections for stronger brand storytelling",
+//       "Direct enquiry flow powered by EmailJS",
+//     ],
+//     technologies: [
+//       "React",
+//       "TypeScript",
+//       "Tailwind CSS",
+//       "HTML",
+//       "CSS",
+//       "Animation",
+//       "Redux",
+//       "EmailJS",
+//     ],
+//   },
+//   {
+//     id: 1,
+//     title: "Enterprise ERP System",
+//     category: "Web",
+//     shortDesc:
+//       "Comprehensive ERP solution for manufacturing with real-time analytics",
+//     image: EnterpriseERPImage,
+//     tags: ["React", "Node.js", "PostgreSQL", "Redis"],
+//     challenge:
+//       "A large manufacturing company needed a custom ERP system to manage inventory, production, sales, and accounting in real-time across multiple locations.",
+//     solution:
+//       "We developed a comprehensive web-based ERP system with modules for inventory management, production planning, sales tracking, and financial reporting. The system features real-time data synchronization, role-based access control, and advanced analytics dashboards.",
+//     results: [
+//       "40% reduction in inventory management time",
+//       "Real-time visibility across 5 manufacturing facilities",
+//       "99.9% system uptime",
+//       "Seamless integration with existing accounting software",
+//     ],
+//     technologies: [
+//       "React",
+//       "TypeScript",
+//       "Node.js",
+//       "Express",
+//       "PostgreSQL",
+//       "Redis",
+//       "Socket.io",
+//       "AWS",
+//     ],
+//   },
+//   {
+//     id: 2,
+//     title: "Luxury Fashion E-commerce",
+//     category: "Ecommerce",
+//     shortDesc:
+//       "High-end fashion marketplace with advanced filtering and premium checkout",
+//     image: LuxuryFashionImage,
+//     tags: ["Next.js", "Stripe", "MongoDB", "AWS"],
+//     challenge:
+//       "A luxury fashion brand wanted to create an exclusive online shopping experience with advanced product visualization and seamless checkout.",
+//     solution:
+//       "We built a premium e-commerce platform featuring advanced product filtering, high-resolution image galleries, size recommendation engine, secure payment processing with multiple gateways, and an intuitive admin panel for inventory management.",
+//     results: [
+//       "200% increase in online sales within 6 months",
+//       "Average order value increased by 35%",
+//       "4.8/5 customer satisfaction rating",
+//       "Mobile conversion rate of 3.2%",
+//     ],
+//     technologies: [
+//       "Next.js",
+//       "React",
+//       "TypeScript",
+//       "MongoDB",
+//       "Stripe API",
+//       "PayPal",
+//       "AWS S3",
+//       "CloudFront",
+//     ],
+//   },
+//   {
+//     id: 3,
+//     title: "Analytics Admin Dashboard",
+//     category: "Admin",
+//     shortDesc: "Feature-rich admin panel with data visualization and reporting",
+//     image: AnalyticsAdminImage,
+//     tags: ["React", "Chart.js", "Material UI", "REST API"],
+//     challenge:
+//       "A SaaS company needed a comprehensive admin dashboard to manage users, monitor system health, and generate detailed analytics reports.",
+//     solution:
+//       "We created a powerful admin panel with interactive data visualizations, user management, role-based permissions, real-time monitoring, and customizable report generation. The dashboard includes advanced filtering, export capabilities, and automated alerts.",
+//     results: [
+//       "Reduced admin task time by 60%",
+//       "Real-time monitoring of 10,000+ active users",
+//       "Automated weekly reports saving 15 hours/week",
+//       "Custom dashboard widgets for different roles",
+//     ],
+//     technologies: [
+//       "React",
+//       "Material UI",
+//       "Chart.js",
+//       "Recharts",
+//       "Node.js",
+//       "PostgreSQL",
+//       "Redis",
+//     ],
+//   },
+//   {
+//     id: 4,
+//     title: "Food Delivery Platform",
+//     category: "Web",
+//     shortDesc: "Multi-vendor food ordering system with real-time tracking",
+//     image: FoodDeliveryImage,
+//     tags: ["React Native", "Node.js", "MongoDB", "Socket.io"],
+//     challenge:
+//       "A startup wanted to create a food delivery platform connecting restaurants, delivery partners, and customers with real-time order tracking.",
+//     solution:
+//       "We developed a comprehensive food delivery ecosystem with separate interfaces for customers, restaurants, and delivery partners. Features include real-time order tracking, intelligent routing, payment integration, review system, and analytics for all stakeholders.",
+//     results: [
+//       "50+ restaurants onboarded in first 3 months",
+//       "5,000+ orders processed monthly",
+//       "Average delivery time of 32 minutes",
+//       "4.6/5 average customer rating",
+//     ],
+//     technologies: [
+//       "React",
+//       "Node.js",
+//       "Express",
+//       "MongoDB",
+//       "Socket.io",
+//       "Stripe",
+//       "Google Maps API",
+//       "AWS",
+//     ],
+//   },
+//   {
+//     id: 5,
+//     title: "RESTful API for Mobile App",
+//     category: "API",
+//     shortDesc: "Scalable backend API serving 100K+ daily requests",
+//     image: RESTfulAPIImage,
+//     tags: ["Node.js", "Express", "PostgreSQL", "Docker"],
+//     challenge:
+//       "A mobile app startup needed a robust, scalable API to handle user authentication, data management, and third-party integrations.",
+//     solution:
+//       "We designed and implemented a RESTful API with comprehensive documentation, JWT-based authentication, rate limiting, caching strategies, and automated testing. The API is containerized with Docker and deployed on AWS with auto-scaling capabilities.",
+//     results: [
+//       "Handles 100,000+ daily API requests",
+//       "Average response time of 120ms",
+//       "99.95% uptime",
+//       "Scales automatically based on load",
+//     ],
+//     technologies: [
+//       "Node.js",
+//       "Express",
+//       "PostgreSQL",
+//       "Redis",
+//       "Docker",
+//       "Kubernetes",
+//       "AWS ECS",
+//       "Swagger",
+//     ],
+//   },
+//   {
+//     id: 6,
+//     title: "Healthcare Portal",
+//     category: "Web",
+//     shortDesc: "Patient management system with telemedicine capabilities",
+//     image: HealthcareImage,
+//     tags: ["React", "Node.js", "PostgreSQL", "WebRTC"],
+//     challenge:
+//       "A healthcare provider needed a HIPAA-compliant portal for patient management, appointment scheduling, and telemedicine consultations.",
+//     solution:
+//       "We built a secure healthcare portal with patient records management, appointment booking, video consultations, prescription management, and billing integration. The system ensures data encryption, audit trails, and compliance with healthcare regulations.",
+//     results: [
+//       "2,000+ patients registered",
+//       "500+ telemedicine consultations monthly",
+//       "HIPAA compliant with regular audits",
+//       "30% reduction in no-show appointments",
+//     ],
+//     technologies: [
+//       "React",
+//       "Node.js",
+//       "PostgreSQL",
+//       "WebRTC",
+//       "AWS",
+//       "Twilio",
+//       "Stripe",
+//     ],
+//   },
+//   {
+//     id: 7,
+//     title: "Inventory Management System",
+//     category: "Admin",
+//     shortDesc: "Multi-location inventory tracking with barcode scanning",
+//     image: InventoryManagementImage,
+//     tags: ["React", "Python", "MySQL", "Barcode"],
+//     challenge:
+//       "A retail chain needed to track inventory across multiple locations with real-time updates and automated reordering.",
+//     solution:
+//       "We developed a comprehensive inventory management system with barcode scanning, multi-location tracking, automated reorder points, supplier management, and detailed reporting. The system integrates with existing POS systems and accounting software.",
+//     results: [
+//       "Tracking 50,000+ SKUs across 15 locations",
+//       "25% reduction in stock-outs",
+//       "Automated reordering saving 10 hours/week",
+//       "Real-time inventory visibility",
+//     ],
+//     technologies: [
+//       "React",
+//       "Python",
+//       "Django",
+//       "MySQL",
+//       "Redis",
+//       "Barcode Scanner API",
+//     ],
+//   },
+//   {
+//     id: 8,
+//     title: "GraphQL API Gateway",
+//     category: "API",
+//     shortDesc: "Unified API gateway for microservices architecture",
+//     image: GraphQLGatewayImage,
+//     tags: ["GraphQL", "Node.js", "Microservices", "Docker"],
+//     challenge:
+//       "An enterprise needed to unify multiple microservices behind a single GraphQL API gateway with authentication and caching.",
+//     solution:
+//       "We implemented a GraphQL API gateway that aggregates data from multiple microservices, provides schema stitching, implements authentication and authorization, and includes intelligent caching strategies. The gateway is containerized and deployed on Kubernetes.",
+//     results: [
+//       "Unified access to 12 microservices",
+//       "50% reduction in API calls",
+//       "Improved developer experience",
+//       "Consistent error handling across services",
+//     ],
+//     technologies: [
+//       "GraphQL",
+//       "Apollo Server",
+//       "Node.js",
+//       "Redis",
+//       "Docker",
+//       "Kubernetes",
+//       "AWS",
+//     ],
+//   },
+//   {
+//     id: 9,
+//     title: "Subscription Management Platform",
+//     category: "Ecommerce",
+//     shortDesc: "Recurring billing system for subscription-based business",
+//     image: SubscriptionImage,
+//     tags: ["Next.js", "Stripe", "PostgreSQL", "Webhooks"],
+//     challenge:
+//       "A SaaS company needed a robust subscription management system with multiple pricing tiers, trial periods, and automated billing.",
+//     solution:
+//       "We built a complete subscription platform with plan management, automated billing, proration handling, dunning management, usage tracking, and a customer portal. The system integrates with Stripe for payment processing and includes comprehensive analytics.",
+//     results: [
+//       "5,000+ active subscriptions",
+//       "98% payment success rate",
+//       "Automated dunning recovering $50K annually",
+//       "Customer self-service reducing support by 40%",
+//     ],
+//     technologies: [
+//       "Next.js",
+//       "React",
+//       "Node.js",
+//       "PostgreSQL",
+//       "Stripe API",
+//       "Webhooks",
+//       "AWS Lambda",
+//     ],
+//   },
+// ];
+
 const projects: Project[] = [
   {
     id: 10,
     title: "Start Animation Studio Website",
     category: "Web",
     shortDesc:
-      "Responsive animation studio website with immersive visuals, polished motion, and enquiry handling",
+      "Professional website for an animation studio with service showcase and enquiry flow",
     image: SAS,
-    tags: ["React", "Tailwind CSS", "Redux", "TypeScript"],
+    tags: ["React", "Tailwind CSS", "TypeScript", "EmailJS"],
     challenge:
-      "An animation studio needed a premium website that could present visual work clearly, feel cinematic, and make it easy for clients to send project enquiries.",
+      "The studio needed a clean and professional website to present its services, creative work, and contact details in a way that looks trustworthy to potential clients.",
     solution:
-      "We built a responsive studio website with React and TypeScript, Tailwind CSS styling, animation-focused UI details, Redux state handling, and EmailJS-powered contact flows.",
+      "We developed a responsive website with a modern layout, service sections, project showcase, contact form, and smooth navigation across desktop and mobile devices.",
     results: [
-      "Polished visual-first presentation for studio services",
-      "Responsive layout across desktop, tablet, and mobile",
-      "Smooth animated sections for stronger brand storytelling",
-      "Direct enquiry flow powered by EmailJS",
+      "Professional online presence for the studio",
+      "Clear service and portfolio presentation",
+      "Mobile-friendly experience for visitors",
+      "Easy enquiry flow through the contact form",
     ],
     technologies: [
       "React",
@@ -54,29 +344,26 @@ const projects: Project[] = [
       "Tailwind CSS",
       "HTML",
       "CSS",
-      "Animation",
-      "Redux",
       "EmailJS",
     ],
   },
   {
     id: 1,
-    title: "Enterprise ERP System",
-    category: "Web",
+    title: "Business Management Dashboard",
+    category: "Admin",
     shortDesc:
-      "Comprehensive ERP solution for manufacturing with real-time analytics",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80",
-    tags: ["React", "Node.js", "PostgreSQL", "Redis"],
+      "Custom dashboard concept for managing business operations and reports",
+    image: EnterpriseERPImage,
+    tags: ["React", "Node.js", "PostgreSQL", "Dashboard"],
     challenge:
-      "A large manufacturing company needed a custom ERP system to manage inventory, production, sales, and accounting in real-time across multiple locations.",
+      "Small and growing businesses often manage data through Excel sheets, WhatsApp messages, and manual records, which makes tracking work slow and confusing.",
     solution:
-      "We developed a comprehensive web-based ERP system with modules for inventory management, production planning, sales tracking, and financial reporting. The system features real-time data synchronization, role-based access control, and advanced analytics dashboards.",
+      "We designed a centralized web dashboard where business users can manage records, view summaries, track activities, and access important reports from one place.",
     results: [
-      "40% reduction in inventory management time",
-      "Real-time visibility across 5 manufacturing facilities",
-      "99.9% system uptime",
-      "Seamless integration with existing accounting software",
+      "Centralized business data management",
+      "Cleaner workflow compared to manual tracking",
+      "Role-based access for different users",
+      "Report-ready structure for daily operations",
     ],
     technologies: [
       "React",
@@ -84,240 +371,210 @@ const projects: Project[] = [
       "Node.js",
       "Express",
       "PostgreSQL",
-      "Redis",
-      "Socket.io",
-      "AWS",
+      "REST API",
     ],
   },
   {
     id: 2,
-    title: "Luxury Fashion E-commerce",
+    title: "E-commerce Storefront",
     category: "Ecommerce",
     shortDesc:
-      "High-end fashion marketplace with advanced filtering and premium checkout",
-    image:
-      "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=900&q=80",
-    tags: ["Next.js", "Stripe", "MongoDB", "AWS"],
+      "Responsive online store design with product listing and checkout-ready flow",
+    image: LuxuryFashionImage,
+    tags: ["React", "Node.js", "MongoDB", "Payment Gateway"],
     challenge:
-      "A luxury fashion brand wanted to create an exclusive online shopping experience with advanced product visualization and seamless checkout.",
+      "A retail business needed a professional online storefront to display products, categories, pricing, and customer enquiry or order options.",
     solution:
-      "We built a premium e-commerce platform featuring advanced product filtering, high-resolution image galleries, size recommendation engine, secure payment processing with multiple gateways, and an intuitive admin panel for inventory management.",
+      "We created an e-commerce website structure with product listing, category filtering, product detail pages, cart flow, and payment gateway-ready architecture.",
     results: [
-      "200% increase in online sales within 6 months",
-      "Average order value increased by 35%",
-      "4.8/5 customer satisfaction rating",
-      "Mobile conversion rate of 3.2%",
+      "Professional product presentation",
+      "Mobile-friendly shopping experience",
+      "Organized product categories and details",
+      "Scalable base for future payment integration",
     ],
     technologies: [
-      "Next.js",
       "React",
       "TypeScript",
+      "Node.js",
       "MongoDB",
-      "Stripe API",
-      "PayPal",
-      "AWS S3",
-      "CloudFront",
+      "REST API",
+      "Payment Gateway",
     ],
   },
   {
     id: 3,
-    title: "Analytics Admin Dashboard",
+    title: "Analytics Admin Panel",
     category: "Admin",
-    shortDesc: "Feature-rich admin panel with data visualization and reporting",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80",
-    tags: ["React", "Chart.js", "Material UI", "REST API"],
+    shortDesc:
+      "Admin dashboard for viewing users, reports, charts, and business activity",
+    image: AnalyticsAdminImage,
+    tags: ["React", "Charts", "Admin Panel", "REST API"],
     challenge:
-      "A SaaS company needed a comprehensive admin dashboard to manage users, monitor system health, and generate detailed analytics reports.",
+      "The client needed a simple way to view business records, user activity, and key reports without checking multiple files or manual records.",
     solution:
-      "We created a powerful admin panel with interactive data visualizations, user management, role-based permissions, real-time monitoring, and customizable report generation. The dashboard includes advanced filtering, export capabilities, and automated alerts.",
+      "We built an admin panel layout with dashboard cards, tables, filters, charts, and report sections to make business data easier to understand.",
     results: [
-      "Reduced admin task time by 60%",
-      "Real-time monitoring of 10,000+ active users",
-      "Automated weekly reports saving 15 hours/week",
-      "Custom dashboard widgets for different roles",
+      "Quick overview of important business data",
+      "Searchable and filterable records",
+      "Chart-based reporting interface",
+      "Admin-friendly layout for daily use",
     ],
     technologies: [
       "React",
-      "Material UI",
+      "TypeScript",
       "Chart.js",
-      "Recharts",
       "Node.js",
+      "REST API",
       "PostgreSQL",
-      "Redis",
     ],
   },
   {
     id: 4,
-    title: "Food Delivery Platform",
+    title: "Food Ordering Website",
     category: "Web",
-    shortDesc: "Multi-vendor food ordering system with real-time tracking",
-    image:
-      "https://images.unsplash.com/photo-1526367790999-0150786686a2?w=900&q=80",
-    tags: ["React Native", "Node.js", "MongoDB", "Socket.io"],
+    shortDesc:
+      "Restaurant ordering website concept with menu, cart, and order flow",
+    image: FoodDeliveryImage,
+    tags: ["React", "Node.js", "MongoDB", "Orders"],
     challenge:
-      "A startup wanted to create a food delivery platform connecting restaurants, delivery partners, and customers with real-time order tracking.",
+      "Restaurants and cafes need a simple digital ordering system where customers can view the menu and place enquiries or orders online.",
     solution:
-      "We developed a comprehensive food delivery ecosystem with separate interfaces for customers, restaurants, and delivery partners. Features include real-time order tracking, intelligent routing, payment integration, review system, and analytics for all stakeholders.",
+      "We created a responsive food ordering website structure with menu categories, item details, cart flow, order summary, and admin-ready order management.",
     results: [
-      "50+ restaurants onboarded in first 3 months",
-      "5,000+ orders processed monthly",
-      "Average delivery time of 32 minutes",
-      "4.6/5 average customer rating",
+      "Digital menu experience for customers",
+      "Mobile-friendly ordering flow",
+      "Clear item and pricing presentation",
+      "Expandable structure for delivery features",
     ],
     technologies: [
       "React",
+      "TypeScript",
       "Node.js",
       "Express",
       "MongoDB",
-      "Socket.io",
-      "Stripe",
-      "Google Maps API",
-      "AWS",
+      "REST API",
     ],
   },
   {
     id: 5,
-    title: "RESTful API for Mobile App",
+    title: "Backend API Development",
     category: "API",
-    shortDesc: "Scalable backend API serving 100K+ daily requests",
-    image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80",
-    tags: ["Node.js", "Express", "PostgreSQL", "Docker"],
+    shortDesc: "Secure backend API structure for web and mobile applications",
+    image: RESTfulAPIImage,
+    tags: ["Node.js", "Express", "PostgreSQL", "JWT"],
     challenge:
-      "A mobile app startup needed a robust, scalable API to handle user authentication, data management, and third-party integrations.",
+      "A web or mobile application needs a reliable backend to manage users, authentication, database records, and communication between frontend and server.",
     solution:
-      "We designed and implemented a RESTful API with comprehensive documentation, JWT-based authentication, rate limiting, caching strategies, and automated testing. The API is containerized with Docker and deployed on AWS with auto-scaling capabilities.",
+      "We developed a backend API structure with authentication, database models, validation, protected routes, and clean API endpoints for frontend integration.",
     results: [
-      "Handles 100,000+ daily API requests",
-      "Average response time of 120ms",
-      "99.95% uptime",
-      "Scales automatically based on load",
+      "Structured backend foundation",
+      "Secure login and protected API routes",
+      "Database-ready architecture",
+      "Easy integration with frontend applications",
     ],
     technologies: [
       "Node.js",
       "Express",
       "PostgreSQL",
-      "Redis",
-      "Docker",
-      "Kubernetes",
-      "AWS ECS",
-      "Swagger",
+      "JWT",
+      "REST API",
+      "Postman",
     ],
   },
   {
     id: 6,
-    title: "Healthcare Portal",
+    title: "Healthcare Appointment Portal",
     category: "Web",
-    shortDesc: "Patient management system with telemedicine capabilities",
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80",
-    tags: ["React", "Node.js", "PostgreSQL", "WebRTC"],
+    shortDesc:
+      "Clinic website concept with appointment booking and patient enquiry flow",
+    image: HealthcareImage,
+    tags: ["React", "Node.js", "PostgreSQL", "Appointments"],
     challenge:
-      "A healthcare provider needed a HIPAA-compliant portal for patient management, appointment scheduling, and telemedicine consultations.",
+      "Clinics need an easy way for patients to check services, doctor availability, and send appointment requests without calling repeatedly.",
     solution:
-      "We built a secure healthcare portal with patient records management, appointment booking, video consultations, prescription management, and billing integration. The system ensures data encryption, audit trails, and compliance with healthcare regulations.",
+      "We designed a healthcare portal structure with service pages, appointment request form, patient enquiry flow, and admin-ready appointment management.",
     results: [
-      "2,000+ patients registered",
-      "500+ telemedicine consultations monthly",
-      "HIPAA compliant with regular audits",
-      "30% reduction in no-show appointments",
+      "Clear presentation of clinic services",
+      "Simple appointment request flow",
+      "Mobile-friendly patient experience",
+      "Expandable base for future admin panel",
     ],
-    technologies: [
-      "React",
-      "Node.js",
-      "PostgreSQL",
-      "WebRTC",
-      "AWS",
-      "Twilio",
-      "Stripe",
-    ],
+    technologies: ["React", "TypeScript", "Node.js", "PostgreSQL", "REST API"],
   },
   {
     id: 7,
     title: "Inventory Management System",
     category: "Admin",
-    shortDesc: "Multi-location inventory tracking with barcode scanning",
-    image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&q=80",
-    tags: ["React", "Python", "MySQL", "Barcode"],
+    shortDesc:
+      "Inventory dashboard concept for stock tracking and product management",
+    image: InventoryManagementImage,
+    tags: ["React", "Node.js", "MySQL", "Inventory"],
     challenge:
-      "A retail chain needed to track inventory across multiple locations with real-time updates and automated reordering.",
+      "Businesses that manage products manually often face stock mismatch, delayed updates, and difficulty tracking available quantities.",
     solution:
-      "We developed a comprehensive inventory management system with barcode scanning, multi-location tracking, automated reorder points, supplier management, and detailed reporting. The system integrates with existing POS systems and accounting software.",
+      "We built an inventory management dashboard concept with product records, stock updates, category management, supplier details, and report-ready views.",
     results: [
-      "Tracking 50,000+ SKUs across 15 locations",
-      "25% reduction in stock-outs",
-      "Automated reordering saving 10 hours/week",
-      "Real-time inventory visibility",
+      "Organized product and stock records",
+      "Simple stock update workflow",
+      "Category-wise inventory management",
+      "Useful reporting structure for admins",
     ],
-    technologies: [
-      "React",
-      "Python",
-      "Django",
-      "MySQL",
-      "Redis",
-      "Barcode Scanner API",
-    ],
+    technologies: ["React", "TypeScript", "Node.js", "MySQL", "REST API"],
   },
   {
     id: 8,
-    title: "GraphQL API Gateway",
+    title: "API Gateway Structure",
     category: "API",
-    shortDesc: "Unified API gateway for microservices architecture",
-    image:
-      "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=900&q=80",
-    tags: ["GraphQL", "Node.js", "Microservices", "Docker"],
+    shortDesc:
+      "Backend gateway concept for connecting multiple services through one API layer",
+    image: GraphQLGatewayImage,
+    tags: ["Node.js", "GraphQL", "Microservices", "API"],
     challenge:
-      "An enterprise needed to unify multiple microservices behind a single GraphQL API gateway with authentication and caching.",
+      "Growing applications may have multiple backend services, making frontend integration difficult when each service has separate endpoints.",
     solution:
-      "We implemented a GraphQL API gateway that aggregates data from multiple microservices, provides schema stitching, implements authentication and authorization, and includes intelligent caching strategies. The gateway is containerized and deployed on Kubernetes.",
+      "We created an API gateway approach that organizes service communication through a single backend layer with authentication, validation, and clean response handling.",
     results: [
-      "Unified access to 12 microservices",
-      "50% reduction in API calls",
-      "Improved developer experience",
-      "Consistent error handling across services",
+      "Cleaner frontend-to-backend communication",
+      "Centralized API handling",
+      "Better structure for future microservices",
+      "Simplified integration approach",
     ],
     technologies: [
-      "GraphQL",
-      "Apollo Server",
       "Node.js",
-      "Redis",
-      "Docker",
-      "Kubernetes",
-      "AWS",
+      "GraphQL",
+      "Express",
+      "REST API",
+      "Authentication",
     ],
   },
   {
     id: 9,
-    title: "Subscription Management Platform",
+    title: "Subscription Billing Platform",
     category: "Ecommerce",
-    shortDesc: "Recurring billing system for subscription-based business",
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=80",
-    tags: ["Next.js", "Stripe", "PostgreSQL", "Webhooks"],
+    shortDesc:
+      "Subscription-based platform concept with plans, billing, and user access",
+    image: SubscriptionImage,
+    tags: ["React", "Node.js", "PostgreSQL", "Billing"],
     challenge:
-      "A SaaS company needed a robust subscription management system with multiple pricing tiers, trial periods, and automated billing.",
+      "Subscription-based businesses need a system to manage plans, users, billing status, renewals, and access control in one place.",
     solution:
-      "We built a complete subscription platform with plan management, automated billing, proration handling, dunning management, usage tracking, and a customer portal. The system integrates with Stripe for payment processing and includes comprehensive analytics.",
+      "We designed a subscription management platform structure with plan selection, customer records, billing status, renewal tracking, and payment gateway-ready flow.",
     results: [
-      "5,000+ active subscriptions",
-      "98% payment success rate",
-      "Automated dunning recovering $50K annually",
-      "Customer self-service reducing support by 40%",
+      "Organized subscription plan management",
+      "Customer and billing status tracking",
+      "Payment gateway-ready architecture",
+      "Scalable base for SaaS-style products",
     ],
     technologies: [
-      "Next.js",
       "React",
+      "TypeScript",
       "Node.js",
       "PostgreSQL",
-      "Stripe API",
-      "Webhooks",
-      "AWS Lambda",
+      "Payment Gateway",
+      "REST API",
     ],
   },
 ];
-
 export default function Portfolio() {
   const [selectedCategory, setSelectedCategory] =
     useState<ProjectCategory>("All");
@@ -368,6 +625,12 @@ export default function Portfolio() {
       />
       <style>
         {`
+          @supports not (height: 100dvh) {
+            .portfolio-modal-backdrop {
+              height: 100svh !important;
+            }
+          }
+
           .portfolio-hidden-scrollbar {
             scrollbar-width: none;
             -ms-overflow-style: none;
@@ -523,8 +786,9 @@ function ProjectModal({
   onClose: () => void;
   isCompact: boolean;
 }) {
-  return (
+  return createPortal(
     <div
+      className="portfolio-modal-backdrop"
       style={styles.modalBackdrop}
       onClick={onClose}
       role="dialog"
@@ -609,7 +873,8 @@ function ProjectModal({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 
@@ -899,20 +1164,25 @@ const styles: Record<string, CSSProperties> = {
   modalBackdrop: {
     position: "fixed",
     inset: 0,
-    zIndex: 80,
+    zIndex: 1100,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: "clamp(12px, 2.5vw, 28px)",
+    minHeight: "100svh",
+    height: "100dvh",
+    padding:
+      "max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left))",
     background: "rgba(15, 23, 42, 0.72)",
     backdropFilter: "blur(14px)",
+    overflowY: "auto",
+    overscrollBehavior: "contain",
   },
   modalPanel: {
     position: "relative",
     display: "grid",
-    gridTemplateColumns: "minmax(360px, 0.9fr) minmax(0, 1.1fr)",
+    gridTemplateColumns: "minmax(300px, 0.82fr) minmax(0, 1.18fr)",
     width: "min(100%, 1180px)",
-    maxHeight: "88vh",
+    maxHeight: "calc(100dvh - 24px)",
     overflowY: "auto",
     overflowX: "hidden",
     border: "1px solid rgba(255,255,255,0.42)",
@@ -922,7 +1192,7 @@ const styles: Record<string, CSSProperties> = {
   },
   modalPanelCompact: {
     display: "block",
-    maxHeight: "90vh",
+    maxHeight: "calc(100dvh - 24px)",
   },
   closeButton: {
     position: "absolute",
