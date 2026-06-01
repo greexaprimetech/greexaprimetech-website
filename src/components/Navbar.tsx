@@ -84,7 +84,7 @@ export function Navbar() {
       style={{
         position: "fixed",
         inset: "0 0 auto 0",
-        zIndex: 50,
+        zIndex: 900,
         padding: "12px 16px",
         transition: "padding 240ms ease, background 240ms ease",
         background: scrolled ? "rgba(248,251,255,0.9)" : "transparent",

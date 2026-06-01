@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 
 interface PageLayoutProps {
@@ -30,8 +29,6 @@ export function PageLayout({ children }: PageLayoutProps) {
           style={{ background: "rgba(14, 165, 233, 0.12)" }}
         />
       </div>
-
-      <Navbar />
 
       <main className="flex-1 pt-20 sm:pt-24 w-full">{children}</main>
 

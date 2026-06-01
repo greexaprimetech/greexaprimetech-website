@@ -11,6 +11,7 @@ import {
   X,
 } from "lucide-react";
 import { useState, FormEvent, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import type { CSSProperties } from "react";
 import emailjs from "@emailjs/browser";
 import { SEO } from "../components/SEO";
@@ -617,22 +618,37 @@ type ContactFormData = {
 // }
 
 function SuccessPopup({ onClose }: { onClose: () => void }) {
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center px-4"
+      className="success-popup-overlay"
       style={{
+        zIndex: 1000,
+        position: "fixed",
+        inset: 0,
+        display: "grid",
+        placeItems: "center",
+        width: "100vw",
+        height: "100dvh",
+        padding:
+          "max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left))",
+        boxSizing: "border-box",
         backgroundColor: "rgba(0,0,0,0.7)",
         backdropFilter: "blur(6px)",
+        overflowY: "auto",
+        overscrollBehavior: "contain",
       }}
     >
       <div
+        className="success-popup-panel"
         style={{
           background: "#ffffff",
           border: "1px solid rgba(148,163,184,0.3)",
-          borderRadius: "1.25rem",
+          borderRadius: "clamp(1rem, 4vw, 1.25rem)",
           boxShadow: "0 24px 70px rgba(15,23,42,0.22)",
-          padding: "2.5rem 2rem",
+          padding: "clamp(1.25rem, 5vw, 2.5rem) clamp(1rem, 4.5vw, 2rem)",
           maxWidth: "420px",
+          maxHeight: "calc(100dvh - 2rem)",
+          overflowY: "auto",
           width: "100%",
           textAlign: "center",
           animation: "popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both",
@@ -640,9 +656,10 @@ function SuccessPopup({ onClose }: { onClose: () => void }) {
       >
         {/* Glow ring around icon */}
         <div
+          className="success-popup-icon"
           style={{
-            width: "80px",
-            height: "80px",
+            width: "clamp(60px, 18vw, 80px)",
+            height: "clamp(60px, 18vw, 80px)",
             borderRadius: "50%",
             background:
               "radial-gradient(circle, rgba(20,184,166,0.16) 0%, transparent 70%)",
@@ -650,19 +667,25 @@ function SuccessPopup({ onClose }: { onClose: () => void }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            margin: "0 auto 1.5rem",
+            margin: "0 auto clamp(1rem, 4vw, 1.5rem)",
             animation: "pulseGlow 2s ease-in-out infinite",
           }}
         >
-          <CheckCircle2 style={{ width: 40, height: 40, color: "#14b8a6" }} />
+          <CheckCircle2
+            style={{
+              width: "clamp(32px, 10vw, 40px)",
+              height: "clamp(32px, 10vw, 40px)",
+              color: "#14b8a6",
+            }}
+          />
         </div>
 
         <h2
           style={{
-            fontSize: "1.5rem",
+            fontSize: "clamp(1.25rem, 5vw, 1.5rem)",
             fontWeight: 700,
             color: "#0f172a",
-            marginBottom: "0.75rem",
+            marginBottom: "clamp(0.55rem, 2vw, 0.75rem)",
             letterSpacing: "-0.02em",
           }}
         >
@@ -672,7 +695,7 @@ function SuccessPopup({ onClose }: { onClose: () => void }) {
         <p
           style={{
             color: "#64748b",
-            fontSize: "0.95rem",
+            fontSize: "clamp(0.88rem, 3vw, 0.95rem)",
             lineHeight: 1.6,
             marginBottom: "0.5rem",
           }}
@@ -686,9 +709,9 @@ function SuccessPopup({ onClose }: { onClose: () => void }) {
         <p
           style={{
             color: "#64748b",
-            fontSize: "0.9rem",
+            fontSize: "clamp(0.84rem, 2.8vw, 0.9rem)",
             lineHeight: 1.6,
-            marginBottom: "2rem",
+            marginBottom: "clamp(1.25rem, 5vw, 2rem)",
           }}
         >
           We've received your message and will get back to you within{" "}
@@ -700,7 +723,8 @@ function SuccessPopup({ onClose }: { onClose: () => void }) {
           onClick={onClose}
           style={{
             width: "100%",
-            padding: "0.75rem 1.5rem",
+            minHeight: "48px",
+            padding: "0.75rem 1.25rem",
             borderRadius: "0.625rem",
             background: "#0f172a",
             color: "#ffffff",
@@ -729,6 +753,34 @@ function SuccessPopup({ onClose }: { onClose: () => void }) {
       </div>
 
       <style>{`
+        .success-popup-overlay {
+          min-height: 100svh;
+        }
+
+        @supports not (height: 100dvh) {
+          .success-popup-overlay {
+            height: 100svh !important;
+          }
+
+          .success-popup-panel {
+            max-height: calc(100svh - 2rem) !important;
+          }
+        }
+
+        .success-popup-panel {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(20,184,166,0.42) transparent;
+        }
+
+        .success-popup-panel::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        .success-popup-panel::-webkit-scrollbar-thumb {
+          border-radius: 999px;
+          background: rgba(20,184,166,0.42);
+        }
+
         @keyframes popIn {
           0%   { opacity: 0; transform: scale(0.8) translateY(20px); }
           100% { opacity: 1; transform: scale(1) translateY(0); }
@@ -737,8 +789,26 @@ function SuccessPopup({ onClose }: { onClose: () => void }) {
           0%, 100% { box-shadow: 0 0 0 0 rgba(0,217,255,0.4); }
           50%       { box-shadow: 0 0 0 12px rgba(0,217,255,0); }
         }
+
+        @media (max-height: 560px) {
+          .success-popup-icon {
+            margin-bottom: 0.75rem !important;
+          }
+
+          .success-popup-panel {
+            padding-block: 1rem !important;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .success-popup-panel,
+          .success-popup-icon {
+            animation: none !important;
+          }
+        }
       `}</style>
-    </div>
+    </div>,
+    document.body,
   );
 }
 
