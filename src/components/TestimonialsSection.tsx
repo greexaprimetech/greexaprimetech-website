@@ -2,7 +2,7 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Rakesh",
+    name: "Rakesh Diwan",
     role: "CEO, SAS",
     content:
       "Greexa Primetech gave our animation studio website the visual quality we wanted. The pages feel polished, responsive, and clear for clients exploring our creative work.",
@@ -10,7 +10,7 @@ const testimonials = [
     metric: "Studio website",
   },
   {
-    name: "Vishwas",
+    name: "Vishwas Dornala",
     role: "Owner, Shiva Gold",
     content:
       "The billing system made our daily work much smoother. It is easier to prepare bills, manage records, and keep the shop process organized without confusion.",
@@ -18,7 +18,7 @@ const testimonials = [
     metric: "Billing system",
   },
   {
-    name: "Sharath",
+    name: "Sharath Baradi",
     role: "Owner, Gopi & Son's Emporium",
     content:
       "Our inventory management is now much easier to track. The system helps us see stock clearly, reduce manual checking, and manage store operations with confidence.",

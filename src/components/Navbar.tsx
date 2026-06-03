@@ -209,32 +209,6 @@ export function Navbar() {
                   gap: 10,
                 }}
               >
-                <span
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    border: "1px solid rgba(20,184,166,0.18)",
-                    borderRadius: 999,
-                    background: "#f0fdfa",
-                    color: "#0f766e",
-                    padding: "7px 11px",
-                    fontSize: 12,
-                    fontWeight: 800,
-                  }}
-                >
-                  <span
-                    style={{
-                      width: 7,
-                      height: 7,
-                      borderRadius: 999,
-                      background: "#14b8a6",
-                      boxShadow: "0 0 0 4px rgba(20,184,166,0.14)",
-                    }}
-                  />
-                  Available
-                </span>
-
                 {/* <Link
                   to="/contact"
                   style={quoteButtonStyle}
