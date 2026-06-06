@@ -1,3 +1,5 @@
+"use client";
+
 import { Phone } from "lucide-react";
 import { trackEvent } from "../utils/analytics";
 
@@ -66,7 +68,7 @@ export function FloatingQuickContact() {
       >
         <span className="gx-floating-contact-copy">
           <span>Chat on WhatsApp</span>
-          <small>Free consult</small>
+          <small>Quick project reply</small>
         </span>
         <span className="gx-floating-contact-icon-wrap">
           <WhatsAppIcon />

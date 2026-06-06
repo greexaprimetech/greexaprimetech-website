@@ -1,3 +1,5 @@
+"use client";
+
 import { PageLayout } from "../components/PageLayout";
 import { GlassCard } from "../components/GlassCard";
 import { GlowButton } from "../components/GlowButton";
@@ -876,11 +878,11 @@ export default function Contact() {
       // const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
       // const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
       const SERVICE_ID =
-        import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_nujyedz";
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_nujyedz";
       const TEMPLATE_ID =
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_qvkk25p";
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_qvkk25p";
       const PUBLIC_KEY =
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "SdLsvwmeSbu3-fXGo";
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "SdLsvwmeSbu3-fXGo";
 
       if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
         throw new Error(

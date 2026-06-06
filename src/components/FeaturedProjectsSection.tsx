@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { ArrowRight, BarChart3, Film, MonitorCog } from "lucide-react";
 import SAS from "../Images/SAS.png";
 import AnalyticsAdminImage from "../Images/portfolio/Analytics Admin.webp";
@@ -21,7 +21,7 @@ const projects = [
       "EmailJS",
     ],
     accent: "teal",
-    image: SAS,
+    image: SAS.src,
   },
   {
     icon: <MonitorCog className="h-6 w-6" />,
@@ -31,7 +31,7 @@ const projects = [
       "Comprehensive ERP solution for manufacturing with real-time analytics.",
     tags: ["React", "Node.js", "PostgreSQL", "Redis"],
     accent: "sky",
-    image: EnterpriseERPImage,
+    image: EnterpriseERPImage.src,
   },
   {
     icon: <BarChart3 className="h-6 w-6" />,
@@ -41,7 +41,7 @@ const projects = [
       "Feature-rich admin panel with data visualization and reporting.",
     tags: ["React", "Chart.js", "Material UI", "REST API"],
     accent: "indigo",
-    image: AnalyticsAdminImage,
+    image: AnalyticsAdminImage.src,
   },
 ];
 
@@ -63,7 +63,7 @@ export function FeaturedProjectsSection() {
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
             A focused look at the kinds of websites, dashboards, and business
-            systems Greexa Primetech can build.
+            systems Greexa PrimeTech can build.
           </p>
         </div>
 
@@ -127,7 +127,7 @@ export function FeaturedProjectsSection() {
                 </div>
 
                 <Link
-                  to="/portfolio"
+                  href="/portfolio"
                   className="premium-project-link mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-extrabold"
                 >
                   View project

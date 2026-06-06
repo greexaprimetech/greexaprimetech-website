@@ -5,7 +5,7 @@ const testimonials = [
     name: "Rakesh Diwan",
     role: "CEO, SAS",
     content:
-      "Greexa Primetech gave our animation studio website the visual quality we wanted. The pages feel polished, responsive, and clear for clients exploring our creative work.",
+      "Greexa PrimeTech gave our animation studio website the visual quality we wanted. The pages feel polished, responsive, and clear for clients exploring our creative work.",
     initials: "RK",
     metric: "Studio website",
   },

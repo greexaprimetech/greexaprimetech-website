@@ -1,4 +1,7 @@
-import { Link, useLocation } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { trackEvent } from "../utils/analytics";
@@ -7,6 +10,7 @@ const navLinks = [
   { path: "/services", label: "Services" },
   { path: "/about", label: "About" },
   { path: "/portfolio", label: "Our Work" },
+  { path: "/blog", label: "Blog" },
   { path: "/contact", label: "Contact" },
 ];
 
@@ -30,31 +34,19 @@ const GIcon = () => (
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
   const navRef = useRef<HTMLElement | null>(null);
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) =>
+    path === "/blog" ? pathname.startsWith("/blog") : pathname === path;
 
-  useEffect(() => setIsOpen(false), [location.pathname]);
+  useEffect(() => setIsOpen(false), [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    const query = window.matchMedia("(min-width: 768px)");
-    const onChange = () => {
-      setIsDesktop(query.matches);
-      if (query.matches) setIsOpen(false);
-    };
-
-    onChange();
-    query.addEventListener("change", onChange);
-    return () => query.removeEventListener("change", onChange);
   }, []);
 
   useEffect(() => {
@@ -93,14 +85,10 @@ export function Navbar() {
     >
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
         <div
+          className="gx-navbar-frame"
           style={{
             position: "relative",
-            display: isDesktop ? "grid" : "flex",
-            gridTemplateColumns: isDesktop
-              ? "minmax(210px, 1fr) auto minmax(210px, 1fr)"
-              : undefined,
             alignItems: "center",
-            justifyContent: "space-between",
             gap: 16,
             minHeight: 68,
             border: "1px solid rgba(148,163,184,0.26)",
@@ -127,9 +115,15 @@ export function Navbar() {
           />
 
           <Link
-            to="/"
+            href="/"
             className="flex items-center gap-3"
             aria-label="Greexa PrimeTech home"
+            style={{
+              justifySelf: "start",
+              width: "fit-content",
+              minWidth: 0,
+              borderRadius: 14,
+            }}
           >
             <span
               style={{
@@ -169,48 +163,41 @@ export function Navbar() {
             </span>
           </Link>
 
-          {isDesktop && (
-            <>
-              <div style={navPillStyle}>
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    style={isActive(link.path) ? activeLinkStyle : navLinkStyle}
-                    onClick={() =>
-                      trackEvent("navbar_link_click", {
-                        location: "navbar_desktop",
-                        page: link.label,
-                        path: link.path,
-                      })
-                    }
-                  >
-                    {isActive(link.path) && (
-                      <span
-                        style={{
-                          width: 6,
-                          height: 6,
-                          borderRadius: 999,
-                          background: "#14b8a6",
-                          boxShadow: "0 0 0 4px rgba(20,184,166,0.14)",
-                        }}
-                      />
-                    )}
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
+          <div className="gx-navbar-desktop">
+            <div style={navPillStyle}>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  href={link.path}
+                  style={isActive(link.path) ? activeLinkStyle : navLinkStyle}
+                  onClick={() =>
+                    trackEvent("navbar_link_click", {
+                      location: "navbar_desktop",
+                      page: link.label,
+                      path: link.path,
+                    })
+                  }
+                >
+                  {isActive(link.path) && (
+                    <span
+                      style={{
+                        width: 6,
+                        height: 6,
+                        borderRadius: 999,
+                        background: "#14b8a6",
+                        boxShadow: "0 0 0 4px rgba(20,184,166,0.14)",
+                      }}
+                    />
+                  )}
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "flex-end",
-                  gap: 10,
-                }}
-              >
-                {/* <Link
-                  to="/contact"
+          <div className="gx-navbar-desktop-cta">
+            {/* <Link
+                  href="/contact"
                   style={quoteButtonStyle}
                   onMouseEnter={(event) => {
                     event.currentTarget.style.transform = "translateY(-2px)";
@@ -224,57 +211,53 @@ export function Navbar() {
                   Get a Quote
                   <ArrowUpRight size={16} />
                 </Link> */}
-                <Link
-                  to="/contact"
-                  style={quoteButtonStyle}
-                  onClick={() =>
-                    trackEvent("quote_button_click", {
-                      location: "navbar_desktop",
-                      button_text: "Get a Quote",
-                    })
-                  }
-                  onMouseEnter={(event) => {
-                    event.currentTarget.style.transform = "translateY(-2px)";
-                    event.currentTarget.style.background = "#0f766e";
-                  }}
-                  onMouseLeave={(event) => {
-                    event.currentTarget.style.transform = "translateY(0)";
-                    event.currentTarget.style.background = "#0f172a";
-                  }}
-                >
-                  Get In Touch
-                  <ArrowUpRight size={16} />
-                </Link>
-              </div>
-            </>
-          )}
-
-          {!isDesktop && (
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 42,
-                height: 42,
-                border: "1px solid rgba(148,163,184,0.32)",
-                borderRadius: 12,
-                background: "#ffffff",
-                color: "#0f172a",
-                boxShadow: "0 10px 24px rgba(15,23,42,0.08)",
+            <Link
+              href="/contact"
+              style={quoteButtonStyle}
+              onClick={() =>
+                trackEvent("quote_button_click", {
+                  location: "navbar_desktop",
+                  button_text: "Get a Quote",
+                })
+              }
+              onMouseEnter={(event) => {
+                event.currentTarget.style.transform = "translateY(-2px)";
+                event.currentTarget.style.background = "#0f766e";
               }}
-              aria-label="Toggle Menu"
-              aria-expanded={isOpen}
+              onMouseLeave={(event) => {
+                event.currentTarget.style.transform = "translateY(0)";
+                event.currentTarget.style.background = "#0f172a";
+              }}
             >
-              {isOpen ? <X size={21} /> : <Menu size={21} />}
-            </button>
-          )}
+              Get In Touch
+              <ArrowUpRight size={16} />
+            </Link>
+          </div>
+
+          <button
+            className="gx-navbar-mobile-toggle"
+            onClick={() => setIsOpen(!isOpen)}
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              width: 42,
+              height: 42,
+              border: "1px solid rgba(148,163,184,0.32)",
+              borderRadius: 12,
+              background: "#ffffff",
+              color: "#0f172a",
+              boxShadow: "0 10px 24px rgba(15,23,42,0.08)",
+            }}
+            aria-label="Toggle Menu"
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <X size={21} /> : <Menu size={21} />}
+          </button>
         </div>
 
-        {isOpen && !isDesktop && (
+        {isOpen && (
           <div
-            className="md:hidden"
+            className="gx-navbar-mobile-menu md:hidden"
             style={{
               marginTop: 10,
               border: "1px solid rgba(148,163,184,0.24)",
@@ -288,7 +271,7 @@ export function Navbar() {
             {navLinks.map((link) => (
               <Link
                 key={link.path}
-                to={link.path}
+                href={link.path}
                 onClick={() => setIsOpen(false)}
                 style={{
                   display: "flex",
@@ -317,7 +300,7 @@ export function Navbar() {
             ))}
             {/* 
             <Link
-              to="/contact"
+              href="/contact"
               onClick={() => setIsOpen(false)}
               style={{
                 ...quoteButtonStyle,
@@ -332,7 +315,7 @@ export function Navbar() {
               <ArrowUpRight size={16} />
             </Link> */}
             <Link
-              to="/contact"
+              href="/contact"
               onClick={() => {
                 trackEvent("quote_button_click", {
                   location: "navbar_mobile",

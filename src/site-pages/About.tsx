@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { PageLayout } from "../components/PageLayout";
 import {
   ArrowRight,
@@ -96,8 +98,8 @@ export default function About() {
 
         <div style={heroShellStyle}>
           <div style={heroCopyStyle}>
-            <span style={eyebrowStyle}>About Greexa Primetech</span>
-            <h1 style={heroTitleStyle}>About Greexa Primetech</h1>
+            <span style={eyebrowStyle}>About Greexa PrimeTech</span>
+            <h1 style={heroTitleStyle}>About Greexa PrimeTech</h1>
             <p style={heroTextStyle}>
               We are a premium web application development agency based in
               Hyderabad, India. We turn ideas into reliable websites,
@@ -106,7 +108,7 @@ export default function About() {
             </p>
 
             <div style={heroActionsStyle}>
-              <Link to="/portfolio" style={secondaryButtonStyle}>
+              <Link href="/portfolio" style={secondaryButtonStyle}>
                 View Work
                 <ArrowRight className="w-4 h-4" />
               </Link>
@@ -126,7 +128,7 @@ export default function About() {
 
           <div style={storyCardStyle}>
             <p>
-              Greexa Primetech was founded with a simple belief: every growing
+              Greexa PrimeTech was founded with a simple belief: every growing
               business deserves software that is clean, dependable, and built
               with care.
             </p>
@@ -174,7 +176,7 @@ export default function About() {
               you shape a clear development path.
             </p>
           </div>
-          <Link to="/contact" style={primaryButtonStyle}>
+          <Link href="/contact" style={primaryButtonStyle}>
             Contact Greexa
             <ArrowRight className="w-4 h-4" />
           </Link>

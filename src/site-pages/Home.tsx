@@ -1,6 +1,10 @@
+"use client";
+
 import { PageLayout } from "../components/PageLayout";
 import { HeroSection } from "../components/HeroSection";
 import { ServicesSection } from "../components/ServicesSection";
+import { PricingPreviewSection } from "../components/PricingPreviewSection";
+import { IndustryFocusSection } from "../components/IndustryFocusSection";
 import { FeaturedProjectsSection } from "../components/FeaturedProjectsSection";
 import { TestimonialsSection } from "../components/TestimonialsSection";
 import { ProcessSection } from "../components/ProcessSection";
@@ -20,11 +24,13 @@ export default function Home() {
       <HeroSection />
 
       <ServicesSection />
+      <PricingPreviewSection />
+      <IndustryFocusSection />
       <FeaturedProjectsSection />
       <TestimonialsSection />
       <ProcessSection />
       <FAQSection />
-      {/* <CTASection /> */}
+      <CTASection />
     </PageLayout>
   );
 }

@@ -1,5 +1,8 @@
+"use client";
+
 import { LegalPage } from "../components/LegalPage";
 import { PageLayout } from "../components/PageLayout";
+
 import { SEO } from "../components/SEO";
 
 const sections = [

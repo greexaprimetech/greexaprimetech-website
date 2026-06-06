@@ -1,6 +1,8 @@
+"use client";
+
 import { PageLayout } from "../components/PageLayout";
-import { GlassCard } from "../components/GlassCard";
-import { Link } from "react-router-dom";
+
+import Link from "next/link";
 import {
   Code2,
   Database,
@@ -318,7 +320,7 @@ export default function Services() {
                     </div>
 
                     <div style={detailFooterStyle}>
-                      <Link to="/contact" style={primaryCtaStyle}>
+                      <Link href="/contact" style={primaryCtaStyle}>
                         Start this service
                         <ArrowRight className="w-4 h-4" />
                       </Link>
@@ -370,68 +372,77 @@ export default function Services() {
         <div className="max-w-7xl mx-auto">
           {/* Title + Subtitle */}
           <div className="mb-15 sm:mb-16 flex flex-col items-center text-center gap-3 sm:gap-4">
+            <span style={eyebrowStyle}>Why clients choose us</span>
             <h2 className="gradient-text text-3xl sm:text-4xl lg:text-5xl font-extrabold">
-              Why Choose Greexa Primetech?
+              Why Choose Greexa PrimeTech?
             </h2>
 
-            <p className="text-base sm:text-lg text-gray-400 max-w-xl sm:max-w-2xl mx-auto">
-              We combine technical expertise with business understanding
+            <p className="text-base sm:text-lg text-slate-600 max-w-xl sm:max-w-2xl mx-auto">
+              We keep the work practical: clear scope, clean execution, and a
+              launch plan your business can actually use.
             </p>
           </div>
 
-          <div className="py-12 sm:py-16 lg:py-20">
-            <div className="premium-card-grid grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="pt-4 sm:pt-6 lg:pt-8">
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "repeat(auto-fit, minmax(min(100%, 330px), 1fr))",
+                gap: 22,
+              }}
+            >
               {[
                 {
-                  title: "Expert Team",
+                  title: "Scope before screens",
                   description:
-                    "Seasoned developers with years of experience in modern web technologies.",
+                    "We first understand your workflow, users, and must-have features so the build does not drift.",
                   icon: <Sparkles className="w-6 h-6" />,
+                  metric: "01",
                 },
                 {
-                  title: "Quality Code",
+                  title: "Clean, maintainable build",
                   description:
-                    "Clean, maintainable, and well-documented code following industry best practices.",
+                    "Frontend, backend, database, and deployment are planned for updates, not just a one-time launch.",
                   icon: <Code2 className="w-6 h-6" />,
+                  metric: "02",
                 },
                 {
-                  title: "Agile Process",
+                  title: "Weekly visibility",
                   description:
-                    "Flexible development methodology with regular updates and feedback loops.",
+                    "You get steady progress updates, review points, and practical decisions before surprises become costly.",
                   icon: <CheckCircle2 className="w-6 h-6" />,
+                  metric: "03",
                 },
                 {
-                  title: "Timely Delivery",
+                  title: "Launch-minded delivery",
                   description:
-                    "We respect deadlines and ensure projects are delivered on time.",
+                    "We plan content, testing, hosting, forms, analytics, and handover so launch day stays calm.",
                   icon: <CheckCircle2 className="w-6 h-6" />,
+                  metric: "04",
                 },
                 {
-                  title: "Scalable Solutions",
+                  title: "Room to grow",
                   description:
-                    "Architecture designed to grow with your business needs.",
+                    "Your first version is focused, but the structure is ready for future modules, dashboards, and automation.",
                   icon: <Boxes className="w-6 h-6" />,
+                  metric: "05",
                 },
                 {
-                  title: "Ongoing Support",
+                  title: "Support after handover",
                   description:
-                    "Comprehensive maintenance and support to keep your application running smoothly.",
+                    "After delivery, we help with fixes, improvements, deployment guidance, and next-phase planning.",
                   icon: <CheckCircle2 className="w-6 h-6" />,
+                  metric: "06",
                 },
-              ].map((item, index) => (
-                <GlassCard key={index} hover>
-                  <div className="space-y-3">
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-[#00d9ff]/10 to-[#0084ff]/10 flex items-center justify-center text-[#00d9ff] border border-[#00d9ff]/20">
-                      {item.icon}
-                    </div>
-                    <h3 className="text-lg font-semibold text-white">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
-                      {item.description}
-                    </p>
+              ].map((item) => (
+                <article key={item.title} style={whyCardStyle}>
+                  <div style={whyIconStyle}>{item.icon}</div>
+                  <div>
+                    <h3 style={whyTitleStyle}>{item.title}</h3>
+                    <p style={whyTextStyle}>{item.description}</p>
                   </div>
-                </GlassCard>
+                </article>
               ))}
             </div>
           </div>
@@ -625,6 +636,53 @@ const previewPillStyle = {
   fontSize: 12,
   fontWeight: 800,
   lineHeight: 1.1,
+} as const;
+
+const whyCardStyle = {
+  position: "relative",
+  overflow: "hidden",
+  minHeight: 255,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  gap: 22,
+  borderWidth: 1,
+  borderStyle: "solid",
+  borderColor: "rgba(148,163,184,0.22)",
+  borderRadius: 18,
+  background:
+    "linear-gradient(145deg, rgba(255,255,255,0.98), rgba(240,253,250,0.72))",
+  boxShadow:
+    "0 24px 70px rgba(15,23,42,0.1), inset 0 1px 0 rgba(255,255,255,0.95)",
+  padding: "clamp(22px, 2.5vw, 30px)",
+} as const;
+
+const whyIconStyle = {
+  display: "grid",
+  placeItems: "center",
+  width: 58,
+  height: 58,
+  border: "1px solid rgba(20,184,166,0.26)",
+  borderRadius: 15,
+  background:
+    "linear-gradient(145deg, rgba(204,251,241,0.95), rgba(240,253,250,0.86))",
+  color: "#0f766e",
+  boxShadow: "0 16px 34px rgba(20,184,166,0.15)",
+} as const;
+
+const whyTitleStyle = {
+  margin: 0,
+  color: "#0f172a",
+  fontSize: "clamp(1.35rem, 2vw, 1.7rem)",
+  fontWeight: 950,
+  lineHeight: 1.12,
+} as const;
+
+const whyTextStyle = {
+  marginTop: 12,
+  color: "#475569",
+  fontSize: 15.5,
+  lineHeight: 1.7,
 } as const;
 
 const learnButtonStyle = {

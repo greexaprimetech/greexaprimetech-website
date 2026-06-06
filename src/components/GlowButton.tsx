@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 interface GlowButtonProps {
@@ -72,7 +72,7 @@ export function GlowButton({
 
   if (href) {
     return (
-      <Link to={href} className={className}>
+      <Link href={href} className={className}>
         {content}
       </Link>
     );

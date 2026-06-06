@@ -3,29 +3,29 @@ import { ChevronDown, HelpCircle } from "lucide-react";
 
 const faqs = [
   {
-    question: "What technologies do you specialize in?",
+    question: "How much does a business website usually cost?",
     answer:
-      "We specialize in modern web technologies including React, Node.js, Next.js, TypeScript, PostgreSQL, MongoDB, and cloud platforms like AWS and Azure.",
+      "A clean business website usually starts from ₹15,000. The final cost depends on page count, content, form requirements, animations, SEO depth, and whether you need integrations like WhatsApp, email, payment, or admin access.",
   },
   {
-    question: "What is your typical project timeline?",
+    question: "How long does a website or software project take?",
     answer:
-      "Project timelines vary based on complexity. A simple web application typically takes 4-8 weeks, while complex enterprise solutions may take 3-6 months. We provide detailed timelines during the discovery phase.",
+      "A focused website can often be completed in 1-3 weeks after content and scope are clear. Admin panels and custom software usually take longer because workflows, roles, data, testing, and deployment need careful planning.",
   },
   {
-    question: "Do you provide ongoing support and maintenance?",
+    question: "Can you help if I only have a rough idea?",
     answer:
-      "Yes, we offer comprehensive support and maintenance packages to ensure your application stays updated, secure, and performs optimally.",
+      "Yes. Many clients start with a rough problem, not a full document. We help convert that into a clear first version: must-have features, optional features, user flow, budget range, and launch plan.",
   },
   {
-    question: "Can you work with existing codebases?",
+    question: "Do you provide support after launch?",
     answer:
-      "Absolutely! We have extensive experience in working with existing applications, whether it is adding new features, refactoring code, or optimizing performance.",
+      "Yes. We provide practical support after launch for fixes, minor improvements, hosting guidance, performance checks, and feature planning. Larger ongoing work can be handled as a maintenance plan.",
   },
   {
-    question: "What is your pricing model?",
+    question: "Will I get source code and deployment help?",
     answer:
-      "We offer flexible pricing models including fixed-price projects, hourly rates, and dedicated team arrangements. Contact us for a customized quote based on your specific needs.",
+      "Yes, project handover can include source code, deployment details, basic documentation, and walkthrough support. The exact handover details are confirmed before development starts.",
   },
 ];
 
@@ -47,10 +47,11 @@ export function FAQSection() {
             Help center
           </span>
           <h2 className="gradient-text mt-4 text-3xl font-extrabold sm:text-4xl lg:text-5xl">
-            Frequently Asked Questions
+            Questions clients ask before starting
           </h2>
           <p className="mx-auto max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-            Find answers to common questions before starting your project.
+            Clear answers about budget, timeline, support, and how we move from
+            idea to launch.
           </p>
         </div>
 

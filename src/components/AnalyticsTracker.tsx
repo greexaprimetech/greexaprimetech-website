@@ -1,13 +1,15 @@
+"use client";
+
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { usePathname } from "next/navigation";
 import { trackPageView } from "../utils/analytics";
 
 export function AnalyticsTracker() {
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
-    trackPageView(location.pathname + location.search);
-  }, [location.pathname, location.search]);
+    trackPageView(pathname + window.location.search);
+  }, [pathname]);
 
   return null;
 }

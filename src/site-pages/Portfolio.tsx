@@ -1,7 +1,10 @@
+"use client";
+
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import type { CSSProperties } from "react";
-import { Link } from "react-router-dom";
+
+import Link from "next/link";
 import { ArrowRight, CheckCircle2, Code2, ExternalLink, X } from "lucide-react";
 import { PageLayout } from "../components/PageLayout";
 import SAS from "../Images/SAS.png";
@@ -326,7 +329,7 @@ const projects: Project[] = [
     category: "Web",
     shortDesc:
       "Professional website for an animation studio with service showcase and enquiry flow",
-    image: SAS,
+    image: SAS.src,
     tags: ["React", "Tailwind CSS", "TypeScript", "EmailJS"],
     challenge:
       "The studio needed a clean and professional website to present its services, creative work, and contact details in a way that looks trustworthy to potential clients.",
@@ -353,7 +356,7 @@ const projects: Project[] = [
     category: "Admin",
     shortDesc:
       "Custom dashboard concept for managing business operations and reports",
-    image: EnterpriseERPImage,
+    image: EnterpriseERPImage.src,
     tags: ["React", "Node.js", "PostgreSQL", "Dashboard"],
     challenge:
       "Small and growing businesses often manage data through Excel sheets, WhatsApp messages, and manual records, which makes tracking work slow and confusing.",
@@ -380,7 +383,7 @@ const projects: Project[] = [
     category: "Ecommerce",
     shortDesc:
       "Responsive online store design with product listing and checkout-ready flow",
-    image: LuxuryFashionImage,
+    image: LuxuryFashionImage.src,
     tags: ["React", "Node.js", "MongoDB", "Payment Gateway"],
     challenge:
       "A retail business needed a professional online storefront to display products, categories, pricing, and customer enquiry or order options.",
@@ -407,7 +410,7 @@ const projects: Project[] = [
     category: "Admin",
     shortDesc:
       "Admin dashboard for viewing users, reports, charts, and business activity",
-    image: AnalyticsAdminImage,
+    image: AnalyticsAdminImage.src,
     tags: ["React", "Charts", "Admin Panel", "REST API"],
     challenge:
       "The client needed a simple way to view business records, user activity, and key reports without checking multiple files or manual records.",
@@ -434,7 +437,7 @@ const projects: Project[] = [
     category: "Web",
     shortDesc:
       "Restaurant ordering website concept with menu, cart, and order flow",
-    image: FoodDeliveryImage,
+    image: FoodDeliveryImage.src,
     tags: ["React", "Node.js", "MongoDB", "Orders"],
     challenge:
       "Restaurants and cafes need a simple digital ordering system where customers can view the menu and place enquiries or orders online.",
@@ -460,7 +463,7 @@ const projects: Project[] = [
     title: "Backend API Development",
     category: "API",
     shortDesc: "Secure backend API structure for web and mobile applications",
-    image: RESTfulAPIImage,
+    image: RESTfulAPIImage.src,
     tags: ["Node.js", "Express", "PostgreSQL", "JWT"],
     challenge:
       "A web or mobile application needs a reliable backend to manage users, authentication, database records, and communication between frontend and server.",
@@ -487,7 +490,7 @@ const projects: Project[] = [
     category: "Web",
     shortDesc:
       "Clinic website concept with appointment booking and patient enquiry flow",
-    image: HealthcareImage,
+    image: HealthcareImage.src,
     tags: ["React", "Node.js", "PostgreSQL", "Appointments"],
     challenge:
       "Clinics need an easy way for patients to check services, doctor availability, and send appointment requests without calling repeatedly.",
@@ -507,7 +510,7 @@ const projects: Project[] = [
     category: "Admin",
     shortDesc:
       "Inventory dashboard concept for stock tracking and product management",
-    image: InventoryManagementImage,
+    image: InventoryManagementImage.src,
     tags: ["React", "Node.js", "MySQL", "Inventory"],
     challenge:
       "Businesses that manage products manually often face stock mismatch, delayed updates, and difficulty tracking available quantities.",
@@ -527,7 +530,7 @@ const projects: Project[] = [
     category: "API",
     shortDesc:
       "Backend gateway concept for connecting multiple services through one API layer",
-    image: GraphQLGatewayImage,
+    image: GraphQLGatewayImage.src,
     tags: ["Node.js", "GraphQL", "Microservices", "API"],
     challenge:
       "Growing applications may have multiple backend services, making frontend integration difficult when each service has separate endpoints.",
@@ -553,7 +556,7 @@ const projects: Project[] = [
     category: "Ecommerce",
     shortDesc:
       "Subscription-based platform concept with plans, billing, and user access",
-    image: SubscriptionImage,
+    image: SubscriptionImage.src,
     tags: ["React", "Node.js", "PostgreSQL", "Billing"],
     challenge:
       "Subscription-based businesses need a system to manage plans, users, billing status, renewals, and access control in one place.",
@@ -867,7 +870,7 @@ function ProjectModal({
           </div>
 
           <div style={styles.modalFooter}>
-            <Link to="/contact" style={styles.darkButton} onClick={onClose}>
+            <Link href="/contact" style={styles.darkButton} onClick={onClose}>
               Start a similar project <ArrowRight size={18} />
             </Link>
           </div>
@@ -1066,7 +1069,9 @@ const styles: Record<string, CSSProperties> = {
   },
   projectCard: {
     overflow: "hidden",
-    border: "1px solid rgba(15, 23, 42, 0.08)",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "rgba(15, 23, 42, 0.08)",
     borderRadius: 26,
     background:
       "linear-gradient(145deg, rgba(255,255,255,0.96), rgba(248,250,252,0.9))",

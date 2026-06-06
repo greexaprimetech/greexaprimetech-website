@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import {
   ArrowRight,
   BarChart3,
@@ -10,10 +10,10 @@ import {
 } from "lucide-react";
 
 const capabilities = [
-  "SaaS products",
-  "Admin dashboards",
-  "Business automation",
-  "Secure APIs",
+  "Custom software",
+  "Business websites",
+  "SaaS dashboards",
+  "AI automation",
 ];
 
 const deliverySteps = [
@@ -53,17 +53,17 @@ export function HeroSection() {
         <div className="gx-content">
           <div className="gx-eyebrow gx-rise-1">
             <CheckCircle2 size={16} />
-            Software development company for growing businesses
+            Software development and automation partner
           </div>
 
           <h1 className="gx-headline gx-rise-2">
-            Professional business software, built around the way you work.
+            Build a sharper digital foundation with Greexa PrimeTech.
           </h1>
 
           <p className="gx-subtitle gx-rise-3">
-            Greexa Primetech helps companies replace scattered tools and manual
-            processes with reliable web applications, dashboards, APIs, and
-            automation systems.
+            Greexa helps growing businesses launch polished websites, custom
+            software, SaaS dashboards, secure APIs, and automation systems that
+            are clear, scalable, and ready for real operations.
           </p>
 
           <div className="gx-capabilities gx-rise-4" aria-label="Core services">
@@ -73,18 +73,18 @@ export function HeroSection() {
           </div>
 
           <div className="gx-actions gx-rise-5">
-            <Link to="/contact" className="gx-primary-cta">
+            <Link href="/contact" className="gx-primary-cta">
               Discuss a Project
               <ArrowRight size={19} />
             </Link>
-            <Link to="/services" className="gx-secondary-cta">
+            <Link href="/services" className="gx-secondary-cta">
               View Services
             </Link>
           </div>
 
           <p className="gx-note gx-rise-6">
-            Clear scope. Clean UI. Secure foundations. Practical support after
-            launch.
+            Strategy, UI, engineering, deployment, and practical support from
+            one focused team.
           </p>
         </div>
 
@@ -230,11 +230,12 @@ export function HeroSection() {
         .gx-headline {
           margin: 0 0 24px;
           font-family: Inter, system-ui, sans-serif;
-          font-size: clamp(42px, 6.7vw, 82px);
+          font-size: clamp(40px, 6vw, 76px);
           font-weight: 900;
-          line-height: 1;
+          line-height: 1.04;
           letter-spacing: 0;
           color: #0f172a;
+          text-wrap: balance;
         }
 
         .gx-subtitle {
@@ -243,6 +244,7 @@ export function HeroSection() {
           color: #475569;
           font-size: clamp(16px, 1.8vw, 20px);
           line-height: 1.68;
+          text-wrap: pretty;
         }
 
         .gx-capabilities {
@@ -335,19 +337,24 @@ export function HeroSection() {
         }
 
         .gx-card-toolbar span {
+          min-width: 0;
           color: #334155;
           font-size: 13px;
           font-weight: 850;
+          line-height: 1.35;
         }
 
         .gx-card-toolbar strong {
+          flex: 0 0 auto;
           padding: 6px 10px;
           border-radius: 999px;
           background: #dcfce7;
           color: #166534;
           font-size: 11px;
+          line-height: 1.15;
           text-transform: uppercase;
           letter-spacing: 0.08em;
+          white-space: nowrap;
         }
 
         .gx-dashboard {
@@ -520,11 +527,15 @@ export function HeroSection() {
           }
 
           .gx-headline {
-            font-size: clamp(38px, 12vw, 54px);
+            max-width: 21rem;
+            font-size: clamp(32px, 10.4vw, 44px);
+            line-height: 1.08;
           }
 
           .gx-subtitle {
-            font-size: 15px;
+            max-width: 22rem;
+            font-size: 15.5px;
+            line-height: 1.62;
           }
 
           .gx-capabilities span {
@@ -547,8 +558,35 @@ export function HeroSection() {
             padding: 16px;
           }
 
+          .gx-card-toolbar {
+            gap: 10px;
+            padding: 12px 13px;
+          }
+
+          .gx-card-toolbar span {
+            font-size: 12.5px;
+          }
+
+          .gx-card-toolbar strong {
+            padding: 6px 9px;
+            font-size: 10px;
+            letter-spacing: 0.06em;
+          }
+
           .gx-stat-grid {
             grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .gx-card-toolbar {
+            align-items: flex-start;
+          }
+
+          .gx-card-toolbar strong {
+            max-width: 5.6rem;
+            white-space: normal;
+            text-align: center;
           }
         }
 

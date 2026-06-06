@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import {
   ArrowUpRight,
   Github,
@@ -14,6 +16,7 @@ const quickLinks = [
   { to: "/services", label: "Services" },
   { to: "/about", label: "About Us" },
   { to: "/portfolio", label: "Our Work" },
+  { to: "/blog", label: "Blog" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -73,6 +76,8 @@ export function Footer() {
       style={{
         position: "relative",
         overflow: "hidden",
+        width: "100%",
+        maxWidth: "100%",
         background:
           "radial-gradient(circle at 12% 20%, rgba(20,184,166,0.22), transparent 28%), radial-gradient(circle at 88% 80%, rgba(14,165,233,0.2), transparent 30%), #0f172a",
         color: "#fff",
@@ -161,7 +166,7 @@ export function Footer() {
               }}
             >
               <Link
-                to="/contact"
+                href="/contact"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -205,7 +210,7 @@ export function Footer() {
           }}
         >
           <AnimatedCard>
-            <Link to="/" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3">
               <span
                 style={{
                   display: "inline-flex",
@@ -272,7 +277,7 @@ export function Footer() {
 
           <FooterList title="Quick Links">
             {quickLinks.map((item) => (
-              <Link key={item.to} to={item.to} style={footerLinkStyle}>
+              <Link key={item.to} href={item.to} style={footerLinkStyle}>
                 {item.label}
               </Link>
             ))}
@@ -322,7 +327,7 @@ export function Footer() {
             fontSize: 14,
           }}
         >
-          <p>&copy; {currentYear} Greexa Primetech. All rights reserved.</p>
+          <p>&copy; {currentYear} Greexa PrimeTech. All rights reserved.</p>
           <div
             style={{
               display: "flex",
@@ -332,10 +337,10 @@ export function Footer() {
               whiteSpace: "nowrap",
             }}
           >
-            <Link to="/privacy-policy" style={{ color: "#cbd5e1" }}>
+            <Link href="/privacy-policy" style={{ color: "#cbd5e1" }}>
               Privacy Policy
             </Link>
-            <Link to="/terms-of-service" style={{ color: "#cbd5e1" }}>
+            <Link href="/terms-of-service" style={{ color: "#cbd5e1" }}>
               Terms of Service
             </Link>
           </div>
@@ -433,6 +438,7 @@ function ContactRow({
     <div
       className="flex gap-3"
       style={{
+        minWidth: 0,
         border: "1px solid rgba(255,255,255,0.1)",
         borderRadius: 10,
         background: "rgba(255,255,255,0.045)",
@@ -443,7 +449,7 @@ function ContactRow({
       <span style={{ flex: "0 0 auto", color: "#99f6e4", marginTop: 2 }}>
         {icon}
       </span>
-      <div className="flex flex-col gap-1">{children}</div>
+      <div className="flex min-w-0 flex-col gap-1">{children}</div>
     </div>
   );
 }
